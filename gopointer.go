@@ -11,20 +11,22 @@ func printval(slicepntr *[]int) (err error) {
 	for i := range slicearray {
 		fmt.Printf("Value in slicepntr[%d] is %v\n", i, slicearray[i])
 	}
-	fmt.Printf("The address of pointer slicepointer is %p", slicepntr)
+	fmt.Printf("The address of pointer slicepointer is %p\n", slicepntr)
 	return nil
 }
 
 func main() {
 	var (
-		intarray    = []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+		intarray    = []int{}
 		intarrayptr = &intarray
+		arraysize   = 10
+		val         int
 	)
 
-	for i, val := range intarray {
+	for i := 0; i < arraysize; i++ {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
 		val = r.Intn(1000)
-		intarray[i] = val
+		intarray = append(intarray, val)
 		fmt.Println("intarray", i, "is", intarray[i])
 	}
 	fmt.Printf("Address for intarray is %p\n", intarrayptr)
