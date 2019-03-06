@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -17,11 +18,21 @@ func printval(slicepntr *[]int) (err error) {
 
 func main() {
 	var (
-		intarray    = []int{}
-		intarrayptr = &intarray
-		arraysize   = 10
-		val         int
+		intarray     = []int{}
+		intarrayptr  = &intarray
+		arraysize    = 10
+		val          int
+		arraysizestr = "10"
+		atoierr      error
 	)
+	fmt.Printf("Please enter desired size of array (default 10): ")
+	if _, err := fmt.Scanf("%s", &arraysizestr); err != nil {
+		fmt.Println(err)
+	}
+	if arraysize, atoierr = strconv.Atoi(arraysizestr); atoierr != nil {
+		arraysize = 10
+		fmt.Printf("Error converting string to integer. Defaulting to array size of 10.\n")
+	}
 
 	for i := 0; i < arraysize; i++ {
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
